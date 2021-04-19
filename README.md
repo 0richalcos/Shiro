@@ -1,7 +1,10 @@
 # shiro
 
 SpringBoot + SpringMVC + Mybatis + Shiro
-Database:Redis + MySQL
+
+Database: Redis + MySQL
+
 Template:
-  Moudle1:JSP
-  Moudle2:Thymeleaf
+
+- Module1: JSP
+- Module2: Thymeleaf
