@@ -20,4 +20,26 @@
         WHERE
             username = #{username};
     </select>
+
+    <select id="findRolesByUsername" parameterType="String" resultType="Role">
+    SELECT
+        t_role.*
+    FROM
+        t_user
+        LEFT JOIN t_user_role ON t_user.id = t_user_role.userid
+        LEFT JOIN t_role ON t_user_role.roleid = t_role.id
+    WHERE
+        t_user.username = #{username}
+</select>
+
+    <select id="findPermsByRoleId" parameterType="String" resultType="Perms">
+    SELECT
+        t_perms.*
+    FROM
+        t_role
+        LEFT JOIN t_role_perms ON t_role.id = t_role.id = t_role_perms.roleid
+        LEFT JOIN t_perms ON t_role_perms.permsid = t_perms.id
+    WHERE
+        t_role.id = #{id}
+</select>
 </mapper>

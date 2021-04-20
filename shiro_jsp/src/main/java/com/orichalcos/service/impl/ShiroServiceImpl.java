@@ -1,5 +1,7 @@
 package com.orichalcos.service.impl;
 
+import com.orichalcos.entity.Perms;
+import com.orichalcos.entity.Role;
 import com.orichalcos.entity.User;
 import com.orichalcos.mapper.ShiroMapper;
 import com.orichalcos.service.ShiroService;
@@ -9,6 +11,8 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author Orichalcos
@@ -35,5 +39,15 @@ public class ShiroServiceImpl implements ShiroService {
     @Override
     public User findUserByUsername(String username) {
         return shiroMapper.findUserByUsername(username);
+    }
+
+    @Override
+    public List<Role> findRolesByUsername(String username) {
+        return shiroMapper.findRolesByUsername(username);
+    }
+
+    @Override
+    public List<Perms> findPermsByRoleId(String id) {
+        return shiroMapper.findPermsByRoleId(id);
     }
 }
