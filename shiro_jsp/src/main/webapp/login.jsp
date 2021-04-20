@@ -6,10 +6,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>登录</title>
 </head>
 <body>
 <h1>用户登录</h1>
+<span>没有账户？</span><a href="${pageContext.request.contextPath}/register.jsp">注册</a>
 <form action="${pageContext.request.contextPath}/login" method="post">
     用户名：<input type="text" name="username"><br>
     密码：<input type="text" name="password"><br>
