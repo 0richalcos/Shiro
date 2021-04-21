@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orichalcos.mapper.ShiroMapper">
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user
+        VALUES
+        (#{id},#{username},#{password},#{salt});
+    </insert>
+
+    <select id="findUserByUsername" parameterType="String" resultType="User">
+        SELECT
+            id,
+            username,
+            password,
+            salt
+        FROM
+            t_user
+        WHERE
+            username = #{username};
+    </select>
+
+    <select id="findRolesByUsername" parameterType="String" resultType="Role">
+    SELECT
+        t_role.*
+    FROM
+        t_user
+        LEFT JOIN t_user_role ON t_user.id = t_user_role.userid
+        LEFT JOIN t_role ON t_user_role.roleid = t_role.id
+    WHERE
+        t_user.username = #{username}
+</select>
+
+    <select id="findPermsByRoleId" parameterType="String" resultType="Perms">
+    SELECT
+        t_perms.*
+    FROM
+        t_role
+        LEFT JOIN t_role_perms ON t_role.id = t_role.id = t_role_perms.roleid
+        LEFT JOIN t_perms ON t_role_perms.permsid = t_perms.id
+    WHERE
+        t_role.id = #{id}
+</select>
+</mapper>
