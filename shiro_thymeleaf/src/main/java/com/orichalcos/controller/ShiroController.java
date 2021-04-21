@@ -29,7 +29,7 @@ public class ShiroController {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(new UsernamePasswordToken(username, password));
-            return "index";
+            return "redirect:index";
         } catch (UnknownAccountException e) {
             e.printStackTrace();
             System.out.println("用户名错误！");
@@ -37,7 +37,7 @@ public class ShiroController {
             e.printStackTrace();
             System.out.println("密码错误！");
         }
-        return "login";
+        return "redirect:login";
     }
 
     /**
@@ -47,10 +47,10 @@ public class ShiroController {
     public String register(User user) {
         try {
             shiroService.register(user);
-            return "login";
+            return "redirect:login";
         } catch (Exception e) {
             e.printStackTrace();
-            return "register";
+            return "redirect:register";
         }
     }
 }

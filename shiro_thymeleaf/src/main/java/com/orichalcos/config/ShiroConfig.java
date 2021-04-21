@@ -1,8 +1,8 @@
 package com.orichalcos.config;
 
-import com.orichalcos.shiro.cacheManager.RedisCacheManager;
 import com.orichalcos.shiro.realm.CustomRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -27,18 +27,17 @@ public class ShiroConfig {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         //注意过滤器配置顺序，不能颠倒
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了，登出后跳转配置的loginUrl
-        filterFactoryBean.setFilterChainDefinitionMap(map);
         map.put("/logout", "logout");
         //配置不会被拦截的链接，顺序判断
         map.put("/login**", "anon");
         map.put("/register**", "anon");
         map.put("/**", "authc");
         //配置shiro默认登录界面地址，前后端分离中登录页面跳转应由前端路由控制，后台仅返回json数据
-        filterFactoryBean.setLoginUrl("/login");
+        filterFactoryBean.setLoginUrl("login");
         //登录成功后要跳转的页面
-        filterFactoryBean.setSuccessUrl("/index");
+        filterFactoryBean.setSuccessUrl("index");
         //未授权页面
-        filterFactoryBean.setUnauthorizedUrl("/403");
+        filterFactoryBean.setUnauthorizedUrl("403");
         filterFactoryBean.setFilterChainDefinitionMap(map);
         filterFactoryBean.setSecurityManager(securityManager);
         return filterFactoryBean;
@@ -75,7 +74,7 @@ public class ShiroConfig {
         customRealm.setAuthorizationCachingEnabled(true);
         customRealm.setAuthorizationCacheName("authorizationCache");
         //设置缓存管理器
-        customRealm.setCacheManager(new RedisCacheManager());
+        customRealm.setCacheManager(new EhCacheManager());
         return customRealm;
     }
 }

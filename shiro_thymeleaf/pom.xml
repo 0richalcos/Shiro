@@ -61,6 +61,12 @@
             <artifactId>shiro-spring-boot-starter</artifactId>
             <version>1.7.1</version>
         </dependency>
+        <!--shiro_encache-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>1.7.1</version>
+        </dependency>
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

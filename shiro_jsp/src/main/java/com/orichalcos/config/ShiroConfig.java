@@ -27,7 +27,6 @@ public class ShiroConfig {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         //注意过滤器配置顺序，不能颠倒
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了，登出后跳转配置的loginUrl
-        filterFactoryBean.setFilterChainDefinitionMap(map);
         map.put("/logout", "logout");
         //配置不会被拦截的链接，顺序判断
         map.put("/login**", "anon");
