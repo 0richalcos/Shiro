@@ -1,9 +1,10 @@
-package com.orichalcos.shiro;
+package com.orichalcos.shiro.realm;
 
 import com.orichalcos.entity.Perms;
 import com.orichalcos.entity.Role;
 import com.orichalcos.entity.User;
 import com.orichalcos.service.ShiroService;
+import com.orichalcos.shiro.MyByteSource;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -12,7 +13,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -56,7 +56,7 @@ public class CustomRealm extends AuthorizingRealm {
         //根据身份查询用户信息
         User user = shiroService.findUserByUsername(principal);
         if (!ObjectUtils.isEmpty(user)) {
-            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), ByteSource.Util.bytes(user.getSalt()), this.getName());
+            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), new MyByteSource(user.getSalt()), this.getName());
         }
         return null;
     }

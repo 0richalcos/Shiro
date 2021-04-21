@@ -11,6 +11,10 @@ spring:
     url: jdbc:mysql://47.106.190.209:3306/shiro?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
+  redis:
+    host: 47.106.190.209
+    port: 6379
+    database: 0
 server:
   port: 8080
   servlet:

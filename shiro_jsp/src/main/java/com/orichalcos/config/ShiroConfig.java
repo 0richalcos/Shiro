@@ -1,6 +1,7 @@
 package com.orichalcos.config;
 
-import com.orichalcos.shiro.CustomRealm;
+import com.orichalcos.shiro.realm.CustomRealm;
+import com.orichalcos.shiro.cacheManager.RedisCacheManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.Realm;
@@ -66,6 +67,15 @@ public class ShiroConfig {
         //设置散列次数
         matcher.setHashIterations(1024);
         customRealm.setCredentialsMatcher(matcher);
+
+        //开启缓存
+        customRealm.setCachingEnabled(true);
+        customRealm.setAuthenticationCachingEnabled(true);
+        customRealm.setAuthenticationCacheName("authenticationCache");
+        customRealm.setAuthorizationCachingEnabled(true);
+        customRealm.setAuthorizationCacheName("authorizationCache");
+        //设置缓存管理器
+        customRealm.setCacheManager(new RedisCacheManager());
         return customRealm;
     }
 }
